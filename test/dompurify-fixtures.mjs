@@ -1,3 +1,23 @@
+/*
+ * VENDORED FROM DOMPURIFY — not our work.
+ *
+ * Source: https://github.com/cure53/DOMPurify — test/fixtures/expect.mjs
+ * Copyright (c) 2015 Mario Heiderich
+ * Licensed under (MPL-2.0 OR Apache-2.0); used here under Apache-2.0, which is
+ * this project's license. See NOTICE.
+ *
+ * This is DOMPurify's published XSS payload corpus. It is vendored rather than
+ * depended on so that it runs as a hard gate in `prepublishOnly` with no
+ * runtime dependency, and so the exact payload set that a release was verified
+ * against is recorded in the repository.
+ *
+ * kilpi is scored on EXECUTABLE RESIDUE, not on matching the `expected` values
+ * below — those encode DOMPurify's own allowlist policy, which kilpi
+ * deliberately does not share. See SECURITY.md.
+ *
+ * Refresh periodically from upstream. Do not hand-edit.
+ */
+
 export default [
   {
       "title": "Don't remove data URIs from SVG images (see #205)",

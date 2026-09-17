@@ -21,8 +21,10 @@ import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
 const here = dirname(fileURLToPath(import.meta.url))
+// `m` flag: the fixtures file opens with a vendoring/attribution comment, so
+// `export default` is not at the start of the string.
 const fixtures = readFileSync(join(here, 'dompurify-fixtures.mjs'), 'utf8').replace(
-  /^export default/,
+  /^export default/m,
   'window.__FIX ='
 )
 const bundle = readFileSync(join(here, '..', 'dist', 'index.js'), 'utf8')

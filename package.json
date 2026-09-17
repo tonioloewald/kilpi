@@ -1,7 +1,7 @@
 {
   "name": "kilpi",
   "version": "0.1.0",
-  "description": "A very small HTML sanitizer for rich-text paste paths — denylist, zero dependencies, passes DOMPurify's published fixture corpus",
+  "description": "A very small HTML sanitizer for rich-text paste paths \u2014 denylist, zero dependencies, passes DOMPurify's published fixture corpus",
   "keywords": [
     "sanitize",
     "sanitizer",
@@ -28,7 +28,8 @@
     "README.md",
     "SECURITY.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "NOTICE"
   ],
   "repository": {
     "type": "git",

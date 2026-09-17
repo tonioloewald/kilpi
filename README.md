@@ -78,6 +78,15 @@ Size and speed are the honest wins. On safety the correct claim is *parity on
 that corpus* — not that kilpi is safer, and not that it is a drop-in replacement,
 because the denylist/allowlist difference is real and is the whole of SECURITY.md.
 
+## Credits
+
+The verification corpus in `test/dompurify-fixtures.mjs` is vendored verbatim
+from [DOMPurify](https://github.com/cure53/DOMPurify) (© 2015 Mario Heiderich,
+MPL-2.0 OR Apache-2.0), used here under Apache-2.0. It is a test fixture and is
+not part of the published package. kilpi exists alongside DOMPurify, not in
+competition with it — see [SECURITY.md](./SECURITY.md) for which of the two you
+should be using.
+
 ## License
 
-Apache-2.0
+Apache-2.0 — see [LICENSE](./LICENSE) and [NOTICE](./NOTICE).
