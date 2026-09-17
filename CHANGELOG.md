@@ -2,6 +2,22 @@
 
 ## [Unreleased]
 
+## [1.0.0]
+
+Same code as 0.1.0. Versioned 1.0.0 so that **security fixes actually reach
+consumers**.
+
+`^0.1.0` resolves to `>=0.1.0 <0.2.0`: under ordinary 0.x convention the next
+behaviour-changing fix ships as 0.2.0, and every installed dependant would stay
+on 0.1.x indefinitely — `npm update` would not cross the minor. For a package
+whose entire job is to be the consumer's XSS defence, a version range that
+blocks propagation is a defect in itself.
+
+The API is two functions and is not expected to change. 0.x was signalling an
+instability that is not there, at the cost of the one property this package most
+needs.
+
+
 ## [0.1.0]
 
 First release. Extracted from
