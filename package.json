@@ -1,5 +1,5 @@
 {
-  "name": "kilpi",
+  "name": "tosijs-kilpi",
   "version": "0.1.0",
   "description": "A very small HTML sanitizer for rich-text paste paths \u2014 denylist, zero dependencies, passes DOMPurify's published fixture corpus",
   "keywords": [

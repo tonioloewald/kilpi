@@ -5,10 +5,18 @@ A very small HTML sanitizer for rich-text paste paths. **Zero dependencies**,
 published, unminified), and it passes DOMPurify's published 223-fixture corpus
 with zero executable residue.
 
-`kilpi` is Finnish for *shield*.
+`kilpi` is Finnish for *shield*. The npm package is **`tosijs-kilpi`** — npm's
+name-similarity check rejects the bare word.
+
+```sh
+npm install tosijs-kilpi
+```
+
+It has no dependency on tosijs or any other package — the prefix is ownership,
+not coupling. Use it anywhere.
 
 ```js
-import { sanitizeInPlace } from 'kilpi'
+import { sanitizeInPlace } from 'tosijs-kilpi'
 
 const temp = document.createElement('div')
 temp.innerHTML = untrustedHtml     // still detached
