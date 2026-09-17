@@ -1,0 +1,57 @@
+{
+  "name": "kilpi",
+  "version": "0.1.0",
+  "description": "A very small HTML sanitizer for rich-text paste paths — denylist, zero dependencies, passes DOMPurify's published fixture corpus",
+  "keywords": [
+    "sanitize",
+    "sanitizer",
+    "xss",
+    "html",
+    "security",
+    "paste",
+    "contenteditable",
+    "rich-text"
+  ],
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!dist/*.tsbuildinfo",
+    "README.md",
+    "SECURITY.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tonioloewald/kilpi.git"
+  },
+  "homepage": "https://github.com/tonioloewald/kilpi#readme",
+  "bugs": {
+    "url": "https://github.com/tonioloewald/kilpi/issues"
+  },
+  "license": "Apache-2.0",
+  "author": "Tonio Loewald",
+  "sideEffects": false,
+  "scripts": {
+    "build": "bun tsc --declaration --emitDeclarationOnly --outDir dist && bun build ./src/index.ts --outfile dist/index.js --target browser --format esm",
+    "test": "bun test",
+    "test:browser": "bun test/browser.mjs",
+    "lint": "bun tsc --noEmit --noUnusedLocals --noUnusedParameters",
+    "prepublishOnly": "bun run build && bun test && bun run lint && bun run test:browser"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.2",
+    "happy-dom": "^20.14.5",
+    "playwright": "1.62.0",
+    "typescript": "^7.0.2"
+  }
+}
