@@ -156,13 +156,26 @@ not degrade, it **fails to parse**. The module throws `SyntaxError` and the
 import fails, so your application breaks rather than silently losing its
 sanitizer.
 
-That is a deliberate difference from DOMPurify, and it cuts both ways. DOMPurify
-sets `isSupported = false` on an engine it cannot help and `sanitize()` then
-**returns your input unchanged** — recoverable if you check the flag, and a
-silent XSS if you forget. kilpi cannot be forgotten about, because nothing runs
-at all; it also cannot be recovered from. If you need to *support* those
-engines rather than merely fail safely on them, use DOMPurify and check
-`isSupported`.
+This is the one place we think our behaviour is better, so it is worth being
+exact about why — and about what we did not do.
+
+DOMPurify, on an engine it cannot help, sets `isSupported = false` and
+`sanitize()` **returns your input unchanged**. That is a security control
+failing OPEN: the call returns a string, the call site cannot tell anything went
+wrong, and the default outcome for anyone who has not read about the flag is
+unsanitized HTML in their document. A safeguard you have to know about and
+remember to check is a footnote, not a safeguard.
+
+kilpi cannot fail that way. Nothing runs, so nothing is silently let through,
+and you find out on the first load in dev, in CI, or from the user.
+
+**But we did not engineer that.** It falls out of using `?.` in the source, and
+we are not going to claim it as a designed safety property after the fact. The
+honest statement is that the failure modes differ, ours is the louder one, and
+loud is the right default for a security control — while DOMPurify's choice is
+coherent for a library that must run everywhere and let the host decide. If you
+need to *support* those engines rather than merely fail noisily on them, use
+DOMPurify and check `isSupported`.
 
 **No configuration, no hooks, no Trusted Types.** There is nothing to tune —
 which is a feature at this size and a hard limit if you need any of it.

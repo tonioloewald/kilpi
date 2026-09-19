@@ -62,9 +62,12 @@ enumerated attribute list has already been wrong once (`ping`, `srcset` and
   DOMPurify.
 - **ES2020 or nothing.** Chrome/Edge 80, Firefox 74, Safari 13.1. Below that the
   module fails to PARSE — it does not degrade. Your app breaks; it does not
-  quietly stop sanitizing. (DOMPurify makes the opposite trade: it returns your
-  input unchanged and sets `isSupported = false`, which is recoverable if you
-  check and a silent XSS if you do not.)
+  quietly stop sanitizing.
+  That is the safer failure for a security control, and it is worth saying that
+  we got it for free from using `?.` rather than designing it. DOMPurify makes
+  the opposite trade deliberately: `sanitize()` returns your input UNCHANGED and
+  sets `isSupported = false` — a control failing open, recoverable only by a
+  reader who knows the flag exists.
 - It takes an **element and mutates it**, never an HTML string, on purpose: a
   string signature forces a serialize-and-reparse round trip, and that round trip
   is where mutation XSS lives.
