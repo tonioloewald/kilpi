@@ -171,11 +171,28 @@ and you find out on the first load in dev, in CI, or from the user.
 
 **But we did not engineer that.** It falls out of using `?.` in the source, and
 we are not going to claim it as a designed safety property after the fact. The
-honest statement is that the failure modes differ, ours is the louder one, and
-loud is the right default for a security control — while DOMPurify's choice is
-coherent for a library that must run everywhere and let the host decide. If you
-need to *support* those engines rather than merely fail noisily on them, use
-DOMPurify and check `isSupported`.
+honest statement is that the failure modes differ and ours is the louder one.
+
+It is tempting to call that an availability-versus-security trade and leave it
+even. It is not even, because the two failures are not the same size:
+
+|  | breaking (ours) | failing open (theirs) |
+| --- | --- | --- |
+| who is affected | only users on that engine | **every later reader, on every browser** |
+| when you find out | immediately | often from someone else |
+| does fixing it fix it | yes, retroactively | no — the payload is already stored |
+
+A sanitizer's failure is not confined to the session that hit it. The payload
+gets *written down*, so it reaches people on perfectly modern browsers
+afterwards, and repairing the sanitizer does not clean the corpus. The engines
+where DOMPurify declines are also old ones — missing Trusted Types, modern CSP,
+site isolation — so it stops sanitizing precisely where the other layers are
+thinnest, and that correlation is causal, not coincidental.
+
+DOMPurify's choice is still coherent for a library that must run everywhere and
+hand the decision to the host. But the decision only gets made if the host knows
+to make it. If you need to *support* those engines rather than fail noisily on
+them, use DOMPurify — and check `isSupported`.
 
 **No configuration, no hooks, no Trusted Types.** There is nothing to tune —
 which is a feature at this size and a hard limit if you need any of it.
