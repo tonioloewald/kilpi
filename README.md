@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/tonioloewald/kilpi/main/static/kilpi.png" alt="" width="96" align="right">
+
 # kilpi
 
 A very small HTML sanitizer for rich-text paste paths. **Zero dependencies**,
