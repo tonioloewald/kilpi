@@ -174,7 +174,23 @@ we are not going to claim it as a designed safety property after the fact. The
 honest statement is that the failure modes differ and ours is the louder one.
 
 It is tempting to call that an availability-versus-security trade and leave it
-even. It is not even, because the two failures are not the same size:
+even. Put it this way instead:
+
+> One car has a collision avoidance system, but fitted to the wrong car, the car
+> will not start. The other car's system lets you start and drive — without
+> collision avoidance.
+>
+> **Why did you fit a collision avoidance system?**
+
+You fitted it because you would rather not crash. A system that quietly lets you
+drive without it has defeated the only reason it is there — and it is worse than
+fitting nothing, because now you believe you are protected. If you are content to
+drive unprotected, do not fit one. Do not fit a sanitizer either.
+
+The wrong car, in this analogy, is the old one: the one without airbags, crumple
+zones or ABS. That is where the system switches itself off.
+
+Precisely, the two failures are not the same size:
 
 |  | breaking (ours) | failing open (theirs) |
 | --- | --- | --- |
