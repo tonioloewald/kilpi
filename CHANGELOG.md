@@ -11,6 +11,27 @@ and you have the whole disclosure history.
 
 ## [Unreleased]
 
+## [1.0.1]
+
+**Documentation only — no code change.** `dist/` is byte-identical to 1.0.0.
+Nothing here affects behaviour or security; published so npm renders the current
+README, which it takes from the tarball.
+
+### Changed
+
+- README now answers the questions DOMPurify's README answers and ours did not:
+  foot-guns, what happens on an unsupported engine, where to report a security
+  bug, and the precise browser baseline (**ES2020** — Chrome/Edge 80, Firefox 74,
+  Safari 13.1 — below which the module fails to parse rather than degrading).
+- Credits DOMPurify properly: as prior art, as the source of the verification
+  corpus, and as the library most people should use. Explains why this exists
+  anyway, with the custom-element default first because it is the only reason
+  that is actually about DOMPurify.
+- States the failure-mode comparison without dressing it up: ours is the louder
+  failure and loud is the right default for a security control, but we did not
+  engineer it — it falls out of using `?.`.
+
+
 ## [1.0.0]
 
 ### Changed
