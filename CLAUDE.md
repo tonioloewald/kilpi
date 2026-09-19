@@ -55,3 +55,16 @@ rather than safety.
 That corpus caught a bypass three adversarial review rounds and 33 hand-written
 vectors had all missed. **Do not trust a hand-written vector list to be the
 gate.** Refresh the fixtures from upstream periodically.
+
+## Changelog discipline
+
+Distribution is moving toward pinned CDN URLs, with npm kept as a publishing
+surface rather than the only one. That makes **the changelog the security
+disclosure channel**, not a nicety alongside one — a consumer on a pinned URL
+has no dependency resolver to carry a fix to them, so the file is what tells
+them to move.
+
+So: **a release that closes a bypass gets a `### Security` section**, naming what
+was closed and, explicitly, whether an earlier released version is affected. Do
+not bury it in prose. A reader scanning for `### Security` should find the entire
+disclosure history and nothing else.

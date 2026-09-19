@@ -1,8 +1,19 @@
 # Changelog
 
+Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+[Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+**Every release that closes a bypass carries a `### Security` section naming what
+was closed and whether an earlier version is affected.** That is deliberate and
+load-bearing: a consumer's update decision is made from this file, so anything a
+reader has to infer from prose is something they will miss. Scan for `### Security`
+and you have the whole disclosure history.
+
 ## [Unreleased]
 
 ## [1.0.0]
+
+### Changed
 
 Same code as 0.1.0. Versioned 1.0.0 so that **security fixes actually reach
 consumers**.
@@ -25,8 +36,11 @@ First release. Extracted from
 was written to close an unsanitized paste/drop path and then hardened across
 three adversarial review rounds plus DOMPurify's published corpus.
 
-The bypasses found and closed along the way, recorded because each is a
-regression test now:
+### Security
+
+No earlier version of this package exists, so **nothing below affects a released
+version of kilpi** — these were all closed before 0.1.0 shipped. They are listed
+because each is a regression test now, and because the shapes recur:
 
 - **control characters inside a scheme** — `.trim()` removes only leading and
   trailing whitespace; the URL parser removes tab/LF/CR anywhere, and Blink
