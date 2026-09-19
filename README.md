@@ -140,10 +140,29 @@ isSafeNavigationUrl('java\tscript:alert(1)')      // false
 HTML, SVG and MathML, including foreign content — the namespace cases are where
 hand-rolled sanitizers usually leak, and they are covered by tests.
 
-**Modern browsers only.** kilpi uses `TreeWalker`, `Element.prototype` getters
-and standard DOM APIs, and has **no `isSupported` flag and no legacy fallback**.
-If you need to support engines that lack these, use DOMPurify, which degrades
-explicitly and tells you when it cannot help.
+**Baseline: ES2020.** Not the DOM APIs — those are ancient (`TreeWalker` and
+`NodeFilter` are IE9-era, and the `Element.prototype` getter reads fall back to
+plain property access). It is the *syntax*: the source uses optional chaining,
+and `?.` appears at module top level.
+
+| | minimum |
+| --- | --- |
+| Chrome / Edge | 80 (Feb 2020) |
+| Firefox | 74 |
+| Safari | 13.1 (Mar 2020) |
+
+Below that — any Internet Explorer, legacy EdgeHTML, Safari ≤ 13.0 — kilpi does
+not degrade, it **fails to parse**. The module throws `SyntaxError` and the
+import fails, so your application breaks rather than silently losing its
+sanitizer.
+
+That is a deliberate difference from DOMPurify, and it cuts both ways. DOMPurify
+sets `isSupported = false` on an engine it cannot help and `sanitize()` then
+**returns your input unchanged** — recoverable if you check the flag, and a
+silent XSS if you forget. kilpi cannot be forgotten about, because nothing runs
+at all; it also cannot be recovered from. If you need to *support* those
+engines rather than merely fail safely on them, use DOMPurify and check
+`isSupported`.
 
 **No configuration, no hooks, no Trusted Types.** There is nothing to tune —
 which is a feature at this size and a hard limit if you need any of it.

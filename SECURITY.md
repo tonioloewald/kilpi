@@ -60,7 +60,11 @@ enumerated attribute list has already been wrong once (`ping`, `srcset` and
   attribute.
 - **No Trusted Types, no hooks, no configuration.** If you need those, you need
   DOMPurify.
-- **Modern browsers only.** No legacy engine workarounds.
+- **ES2020 or nothing.** Chrome/Edge 80, Firefox 74, Safari 13.1. Below that the
+  module fails to PARSE — it does not degrade. Your app breaks; it does not
+  quietly stop sanitizing. (DOMPurify makes the opposite trade: it returns your
+  input unchanged and sets `isSupported = false`, which is recoverable if you
+  check and a silent XSS if you do not.)
 - It takes an **element and mutates it**, never an HTML string, on purpose: a
   string signature forces a serialize-and-reparse round trip, and that round trip
   is where mutation XSS lives.
